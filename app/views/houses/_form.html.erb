@@ -18,7 +18,7 @@
 
   <div class="field">
     <%= form.label :price %>
-    <%= form.number_field :price %>
+    <%= form.number_field :price %>円
   </div>
 
   <div class="field">
@@ -28,13 +28,27 @@
 
   <div class="field">
     <%= form.label :age %>
-    <%= form.number_field :age %>
+    <%= form.number_field :age %>年
   </div>
 
   <div class="field">
     <%= form.label :comment %>
     <%= form.text_area :comment %>
   </div>
+
+  <%= form.fields_for :stations do |station| %>
+  <h4>最寄駅<%= station.index + 1 %></h4>
+    <div class="form-group">
+      <%= station.label :line, "路線名" %>
+      <%= station.text_field :line %>線
+      <br>
+      <%= station.label :name, "駅名" %>
+      <%= station.text_field :name %>駅
+      <br>
+      <%= station.label :elapsed_time, "徒歩分数" %>
+      <%= station.number_field :elapsed_time %>分
+      </div>
+  <% end %>
 
   <div class="actions">
     <%= form.submit %>
