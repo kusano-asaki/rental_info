@@ -25,22 +25,21 @@
   <%= @house.comment %>
 </p>
 
-<% n = 0 %>
-<% @house.stations.each do |station|%>
-<h4>最寄駅<% n += 1 %></h4>
+<% @house.stations.each_with_index do |s, i| %>
+<h4><%= "最寄駅#{i+1}" %></h4>
   <p>
     <strong>路線名:</strong>
-    <%= station.line %>線
+    <%= s.line %>線
   </p>
 
   <p>
     <strong>駅名:</strong>
-    <%= station.name %>駅
+    <%= s.name %>駅
   </p>
 
   <p>
     <strong>徒歩分数:</strong>
-    <%= station.elapsed_time %>分
+    <%= s.elapsed_time %>分
   </p>
 <% end %>
 

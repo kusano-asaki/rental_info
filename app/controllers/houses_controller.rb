@@ -1,5 +1,5 @@
 class HousesController < ApplicationController
-  before_action :set_house, only: [:show, :edit, :update, :destroy]
+  before_action :set_house, only: %i(show edit update destroy)
 
   def index
     @houses = House.all
@@ -10,7 +10,7 @@ class HousesController < ApplicationController
 
   def new
     @house = House.new
-    2.times{@house.stations.build}
+    @house.stations.build
   end
 
   def edit
@@ -55,6 +55,6 @@ class HousesController < ApplicationController
     end
 
       def house_params
-      params.require(:house).permit(:name, :price, :address, :age, :comment, stations_attributes: [:line, :name, :elapsed_time, :id])
+      params.require(:house).permit(:name, :price, :address, :age, :comment, stations_attributes: %i(id line name elapsed_time house_id))
     end
 end

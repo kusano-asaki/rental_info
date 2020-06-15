@@ -1,4 +1,4 @@
-<%= form_with(model: house, local: true) do |form| %>
+<%= nested_form_for(house) do |form| %>
   <% if house.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(house.errors.count, "error") %> prohibited this house from being saved:</h2>
@@ -36,8 +36,10 @@
     <%= form.text_area :comment %>
   </div>
 
+  <% n = 0 %>
   <%= form.fields_for :stations do |station| %>
-  <h4>最寄駅<%= station.index + 1 %></h4>
+  <% n += 1 %>
+  <p class="moyorieki"></p>
     <div class="form-group">
       <%= station.label :line, "路線名" %>
       <%= station.text_field :line %>線
@@ -50,7 +52,25 @@
       </div>
   <% end %>
 
+  <%= form.link_to_add :最寄駅を追加, :stations, id: "addStation" %>
+
   <div class="actions">
     <%= form.submit %>
   </div>
+
 <% end %>
+
+<script>
+window.onload = () => {
+  document.getElementsByClassName('moyorieki')[0].innerText = "最寄駅1"
+  const button = document.getElementById('addStation')
+  button.addEventListener('click', () => {
+    setTimeout(() => {
+      const moyoriekis = document.getElementsByClassName('moyorieki')
+      for(i = 0; i < moyoriekis.length; i++){
+        moyoriekis[i].innerHTML = `最寄駅${i+1}`
+      }
+    }, 1)
+  })
+}
+</script>
