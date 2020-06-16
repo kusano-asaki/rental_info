@@ -1,8 +1,8 @@
 <%= nested_form_for(house) do |form| %>
+<div class="house_date">
   <% if house.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(house.errors.count, "error") %> prohibited this house from being saved:</h2>
-
       <ul>
       <% house.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -35,30 +35,32 @@
     <%= form.label :comment %>
     <%= form.text_area :comment %>
   </div>
+</div>
 
-  <% n = 0 %>
-  <%= form.fields_for :stations do |station| %>
-  <% n += 1 %>
-  <p class="moyorieki"></p>
-    <div class="form-group">
-      <%= station.label :line, "路線名" %>
-      <%= station.text_field :line %>線
-      <br>
-      <%= station.label :name, "駅名" %>
-      <%= station.text_field :name %>駅
-      <br>
-      <%= station.label :elapsed_time, "徒歩分数" %>
-      <%= station.number_field :elapsed_time %>分
-      </div>
+  <div class="station_date">
+    <% n = 0 %>
+    <%= form.fields_for :stations do |station| %>
+    <% n += 1 %>
+    <p class="moyorieki"></p>
+      <div class="form-group">
+        <%= station.label :line, "路線名" %>
+        <%= station.text_field :line %>線
+        <br>
+        <%= station.label :name, "駅名" %>
+        <%= station.text_field :name %>駅
+        <br>
+        <%= station.label :elapsed_time, "徒歩分数" %>
+        <%= station.number_field :elapsed_time %>分
+        </div>
+    <% end %>
+
+    <%= form.link_to_add :最寄駅を追加, :stations, id: "addStation" %>
+
+    <div class="actions">
+      <%= form.submit %>
+    </div>
   <% end %>
-
-  <%= form.link_to_add :最寄駅を追加, :stations, id: "addStation" %>
-
-  <div class="actions">
-    <%= form.submit %>
   </div>
-
-<% end %>
 
 <script>
 window.onload = () => {

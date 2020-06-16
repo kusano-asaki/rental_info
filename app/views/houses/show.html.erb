@@ -1,29 +1,31 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>物件名:</strong>
-  <%= @house.name %>
-</p>
+<div class="house_date">
+  <p>
+    <strong>物件名:</strong>
+    <%= @house.name %>
+  </p>
 
-<p>
-  <strong>賃料:</strong>
-  <%= @house.price %>円
-</p>
+  <p>
+    <strong>賃料:</strong>
+    <%= @house.price %>円
+  </p>
 
-<p>
-  <strong>住所:</strong>
-  <%= @house.address %>
-</p>
+  <p>
+    <strong>住所:</strong>
+    <%= @house.address %>
+  </p>
 
-<p>
-  <strong>築年数:</strong>
-  <%= @house.age %>年
-</p>
+  <p>
+    <strong>築年数:</strong>
+    <%= @house.age %>年
+  </p>
 
-<p>
-  <strong>備考:</strong>
-  <%= @house.comment %>
-</p>
+  <p>
+    <strong>備考:</strong>
+    <%= @house.comment %>
+  </p>
+</div>
 
 <% @house.stations.each_with_index do |s, i| %>
 <h4><%= "最寄駅#{i+1}" %></h4>
@@ -42,7 +44,6 @@
     <%= s.elapsed_time %>分
   </p>
 <% end %>
-
 
 <%= link_to '編集', edit_house_path(@house) %> |
 <%= link_to '戻る', houses_path %>
